@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/muhammedikinci/super-duper-octo-enigma/lsp"
 	"github.com/muhammedikinci/super-duper-octo-enigma/rpc"
 )
 
@@ -19,13 +21,30 @@ func main() {
 	scanner.Split(rpc.Split)
 
 	for scanner.Scan() {
-		msg := scanner.Text()
-		handleMessage(logger, msg)
+		msg := scanner.Bytes()
+		method, content, err := rpc.DecodeMessage(msg)
+		if err != nil {
+			logger.Printf("we have an error: %s\n", err)
+		}
+		handleMessage(logger, method, content)
 	}
 }
 
-func handleMessage(logger *log.Logger, msg any) {
-	logger.Println(msg)
+func handleMessage(logger *log.Logger, method string, content []byte) {
+	logger.Printf("received with %s", method)
+
+	switch method {
+	case "initialize":
+		var request lsp.InitializeRequest
+		if err := json.Unmarshal(content, &request); err != nil {
+			logger.Printf("we couldnt parse this %s\n", err)
+		}
+
+		logger.Printf("connected to %s %s",
+			request.Params.ClientInfo.Name,
+			request.Params.ClientInfo.Version,
+		)
+	}
 }
 
 func getLogger(filename string) *log.Logger {
