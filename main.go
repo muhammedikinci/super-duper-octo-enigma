@@ -44,6 +44,14 @@ func handleMessage(logger *log.Logger, method string, content []byte) {
 			request.Params.ClientInfo.Name,
 			request.Params.ClientInfo.Version,
 		)
+
+		msg := lsp.NewInitializeResponse(request.ID)
+		reply := rpc.EncodeMessage(msg)
+
+		writer := os.Stdout
+		writer.Write([]byte(reply))
+
+		logger.Print("Sent reply")
 	}
 }
 

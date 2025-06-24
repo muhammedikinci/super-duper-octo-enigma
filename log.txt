@@ -1,3 +1,6 @@
-[my_lsp]2025/06/24 01:10:45 main.go:18: lsp server started
-[my_lsp]2025/06/24 01:10:45 main.go:34: received with initialize
-[my_lsp]2025/06/24 01:10:45 main.go:43: connected to Neovim 0.11.1
+[my_lsp]2025/06/24 20:35:34 main.go:18: lsp server started
+[my_lsp]2025/06/24 20:35:34 main.go:34: received with initialize
+[my_lsp]2025/06/24 20:35:34 main.go:43: connected to Neovim 0.11.1
+[my_lsp]2025/06/24 20:35:34 main.go:54: Sent reply
+[my_lsp]2025/06/24 20:35:34 main.go:34: received with initialized
+[my_lsp]2025/06/24 20:36:33 main.go:34: received with shutdown
