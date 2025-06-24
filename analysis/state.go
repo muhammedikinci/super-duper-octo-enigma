@@ -2,6 +2,7 @@ package analysis
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/muhammedikinci/super-duper-octo-enigma/lsp"
 )
@@ -55,5 +56,45 @@ func (s *State) Definition(id int, uri string, position lsp.Position) lsp.Defini
 				},
 			},
 		},
+	}
+}
+
+func (s *State) CodeAction(id int, uri string) lsp.CodeActionResponse {
+	text := s.Documents[uri]
+
+	actions := []lsp.CodeAction{}
+	for row, line := range strings.Split(text, "\n") {
+		idx := strings.Index(line, "VS Code")
+		if idx >= 0 {
+			replaceChange := map[string][]lsp.TextEdit{}
+			replaceChange[uri] = []lsp.TextEdit{
+				{
+					Range: lsp.Range{
+						Start: lsp.Position{
+							Line:      row,
+							Character: idx,
+						},
+						End: lsp.Position{
+							Line:      row,
+							Character: idx + len("VS Code"),
+						},
+					},
+					NewText: "Neeeovim",
+				},
+			}
+
+			actions = append(actions, lsp.CodeAction{
+				Title: "replace vs c*de with super duper neeeovim",
+				Edit:  &lsp.WorkspaceEdit{Changes: replaceChange},
+			})
+		}
+	}
+
+	return lsp.CodeActionResponse{
+		Response: lsp.Response{
+			RPC: "2.0",
+			ID:  &id,
+		},
+		Result: actions,
 	}
 }
