@@ -1,12 +1,16 @@
-[my_lsp]2025/06/24 22:55:47 main.go:20: lsp server started
-[my_lsp]2025/06/24 22:55:47 main.go:45: received with initialize
-[my_lsp]2025/06/24 22:55:47 main.go:55: connected to Neovim 0.11.1
-[my_lsp]2025/06/24 22:55:47 main.go:63: Sent reply
-[my_lsp]2025/06/24 22:55:47 main.go:45: received with initialized
-[my_lsp]2025/06/24 22:55:47 main.go:45: received with textDocument/didOpen
-[my_lsp]2025/06/24 22:55:47 main.go:72: Opened: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
-[my_lsp]2025/06/24 22:55:50 main.go:45: received with textDocument/hover
-[my_lsp]2025/06/24 22:55:50 main.go:45: received with textDocument/didOpen
-[my_lsp]2025/06/24 22:55:50 main.go:72: Opened: file://
-[my_lsp]2025/06/24 22:55:56 main.go:45: received with textDocument/didClose
-[my_lsp]2025/06/24 22:55:57 main.go:45: received with shutdown
+[my_lsp]2025/06/24 23:13:22 main.go:20: lsp server started
+[my_lsp]2025/06/24 23:13:22 main.go:45: received with initialize
+[my_lsp]2025/06/24 23:13:22 main.go:55: connected to Neovim 0.11.1
+[my_lsp]2025/06/24 23:13:22 main.go:63: Sent reply
+[my_lsp]2025/06/24 23:13:22 main.go:45: received with initialized
+[my_lsp]2025/06/24 23:13:22 main.go:45: received with textDocument/didOpen
+[my_lsp]2025/06/24 23:13:22 main.go:72: Opened: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
+[my_lsp]2025/06/24 23:13:34 main.go:45: received with textDocument/hover
+[my_lsp]2025/06/24 23:13:34 main.go:45: received with textDocument/didOpen
+[my_lsp]2025/06/24 23:13:34 main.go:72: Opened: file://
+[my_lsp]2025/06/24 23:13:35 main.go:45: received with textDocument/didClose
+[my_lsp]2025/06/24 23:14:09 main.go:45: received with textDocument/definition
+[my_lsp]2025/06/24 23:14:13 main.go:45: received with textDocument/definition
+[my_lsp]2025/06/24 23:14:14 main.go:45: received with textDocument/definition
+[my_lsp]2025/06/24 23:14:19 main.go:45: received with textDocument/definition
+[my_lsp]2025/06/24 23:16:25 main.go:45: received with shutdown

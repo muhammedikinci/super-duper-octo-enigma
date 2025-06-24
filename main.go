@@ -105,6 +105,21 @@ func handleMessage(
 		)
 
 		writeResponse(writer, response)
+
+	case "textDocument/definition":
+		var request lsp.DefinitionRequest
+		if err := json.Unmarshal(content, &request); err != nil {
+			logger.Printf("we couldnt parse this %s\n", err)
+			return
+		}
+
+		response := state.Definition(
+			request.ID,
+			request.Params.TextDocument.URI,
+			request.Params.Position,
+		)
+
+		writeResponse(writer, response)
 	}
 }
 
