@@ -134,6 +134,20 @@ func handleMessage(
 		)
 
 		writeResponse(writer, response)
+
+	case "textDocument/completion":
+		var request lsp.CompletionRequest
+		if err := json.Unmarshal(content, &request); err != nil {
+			logger.Printf("we couldnt parse this %s\n", err)
+			return
+		}
+
+		response := state.Completion(
+			request.ID,
+			request.Params.TextDocument.URI,
+		)
+
+		writeResponse(writer, response)
 	}
 }
 

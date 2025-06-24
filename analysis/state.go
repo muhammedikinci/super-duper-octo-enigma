@@ -98,3 +98,19 @@ func (s *State) CodeAction(id int, uri string) lsp.CodeActionResponse {
 		Result: actions,
 	}
 }
+
+func (s *State) Completion(id int, uri string) lsp.CompletionResponse {
+	return lsp.CompletionResponse{
+		Response: lsp.Response{
+			RPC: "2.0",
+			ID:  &id,
+		},
+		Result: []lsp.CompletionItem{
+			{
+				Label:         "olaf",
+				Detail:        "print it if you are real man",
+				Documentation: "it cannot be documented like this sorry about it",
+			},
+		},
+	}
+}
