@@ -1,6 +1,9 @@
-[my_lsp]2025/06/24 20:35:34 main.go:18: lsp server started
-[my_lsp]2025/06/24 20:35:34 main.go:34: received with initialize
-[my_lsp]2025/06/24 20:35:34 main.go:43: connected to Neovim 0.11.1
-[my_lsp]2025/06/24 20:35:34 main.go:54: Sent reply
-[my_lsp]2025/06/24 20:35:34 main.go:34: received with initialized
-[my_lsp]2025/06/24 20:36:33 main.go:34: received with shutdown
+[my_lsp]2025/06/24 20:49:54 main.go:18: lsp server started
+[my_lsp]2025/06/24 20:49:54 main.go:34: received with initialize
+[my_lsp]2025/06/24 20:49:54 main.go:43: connected to Neovim 0.11.1
+[my_lsp]2025/06/24 20:49:54 main.go:54: Sent reply
+[my_lsp]2025/06/24 20:49:54 main.go:34: received with initialized
+[my_lsp]2025/06/24 20:49:54 main.go:34: received with textDocument/didOpen
+[my_lsp]2025/06/24 20:49:54 main.go:62: Opened: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md # lsp server
+[my_lsp]2025/06/24 20:50:02 main.go:34: received with textDocument/didSave
+[my_lsp]2025/06/24 20:50:10 main.go:34: received with shutdown
