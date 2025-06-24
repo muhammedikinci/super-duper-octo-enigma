@@ -15,12 +15,38 @@ func NewState() State {
 	return State{Documents: map[string]string{}}
 }
 
-func (s *State) OpenDocument(uri, text string) {
+func (s *State) OpenDocument(uri, text string) []lsp.Diagnostic {
 	s.Documents[uri] = text
+
+	return []lsp.Diagnostic{}
 }
 
-func (s *State) UpdateDocument(uri, text string) {
+func (s *State) UpdateDocument(uri, text string) []lsp.Diagnostic {
 	s.Documents[uri] = text
+
+	diags := []lsp.Diagnostic{}
+	for row, line := range strings.Split(text, "\n") {
+		idx := strings.Index(line, "VS Code")
+		if idx >= 0 {
+			diags = append(diags, lsp.Diagnostic{
+				Range: lsp.Range{
+					Start: lsp.Position{
+						Line:      row,
+						Character: idx,
+					},
+					End: lsp.Position{
+						Line:      row,
+						Character: idx + len("VS Code"),
+					},
+				},
+				Severity: 1,
+				Source:   "from my lsp bro",
+				Message:  "how you dare?",
+			})
+		}
+	}
+
+	return diags
 }
 
 func (s *State) Hover(id int, uri string, position lsp.Position) lsp.HoverResponse {
