@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"os"
 
@@ -20,6 +21,7 @@ func main() {
 
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Split(rpc.Split)
+	writer := os.Stdout
 
 	state := analysis.NewState()
 
@@ -29,11 +31,17 @@ func main() {
 		if err != nil {
 			logger.Printf("we have an error: %s\n", err)
 		}
-		handleMessage(logger, method, content, state)
+		handleMessage(logger, writer, method, content, state)
 	}
 }
 
-func handleMessage(logger *log.Logger, method string, content []byte, state analysis.State) {
+func handleMessage(
+	logger *log.Logger,
+	writer io.Writer,
+	method string,
+	content []byte,
+	state analysis.State,
+) {
 	logger.Printf("received with %s", method)
 
 	switch method {
@@ -50,10 +58,7 @@ func handleMessage(logger *log.Logger, method string, content []byte, state anal
 		)
 
 		msg := lsp.NewInitializeResponse(request.ID)
-		reply := rpc.EncodeMessage(msg)
-
-		writer := os.Stdout
-		writer.Write([]byte(reply))
+		writeResponse(writer, msg)
 
 		logger.Print("Sent reply")
 
@@ -85,7 +90,31 @@ func handleMessage(logger *log.Logger, method string, content []byte, state anal
 		for _, change := range request.Params.ContentChanges {
 			state.UpdateDocument(request.Params.TextDocument.URI, change.Text)
 		}
+
+	case "textDocument/hover":
+		var request lsp.HoverRequest
+		if err := json.Unmarshal(content, &request); err != nil {
+			logger.Printf("we couldnt parse this %s\n", err)
+			return
+		}
+
+		response := lsp.HoverResponse{
+			Response: lsp.Response{
+				RPC: "2.0",
+				ID:  &request.ID,
+			},
+			Result: lsp.HoverResult{
+				Contents: "hello, from my lsp",
+			},
+		}
+
+		writeResponse(writer, response)
 	}
+}
+
+func writeResponse(writer io.Writer, msg any) {
+	reply := rpc.EncodeMessage(msg)
+	writer.Write([]byte(reply))
 }
 
 func getLogger(filename string) *log.Logger {
