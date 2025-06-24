@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/muhammedikinci/super-duper-octo-enigma/analysis"
 	"github.com/muhammedikinci/super-duper-octo-enigma/lsp"
 	"github.com/muhammedikinci/super-duper-octo-enigma/rpc"
 )
@@ -20,17 +21,19 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Split(rpc.Split)
 
+	state := analysis.NewState()
+
 	for scanner.Scan() {
 		msg := scanner.Bytes()
 		method, content, err := rpc.DecodeMessage(msg)
 		if err != nil {
 			logger.Printf("we have an error: %s\n", err)
 		}
-		handleMessage(logger, method, content)
+		handleMessage(logger, method, content, state)
 	}
 }
 
-func handleMessage(logger *log.Logger, method string, content []byte) {
+func handleMessage(logger *log.Logger, method string, content []byte, state analysis.State) {
 	logger.Printf("received with %s", method)
 
 	switch method {
@@ -38,6 +41,7 @@ func handleMessage(logger *log.Logger, method string, content []byte) {
 		var request lsp.InitializeRequest
 		if err := json.Unmarshal(content, &request); err != nil {
 			logger.Printf("we couldnt parse this %s\n", err)
+			return
 		}
 
 		logger.Printf("connected to %s %s",
@@ -57,13 +61,30 @@ func handleMessage(logger *log.Logger, method string, content []byte) {
 		var request lsp.DidOpenTextDocumentNotification
 		if err := json.Unmarshal(content, &request); err != nil {
 			logger.Printf("we couldnt parse this %s\n", err)
+			return
 		}
 
 		logger.Printf(
-			"Opened: %s %s",
+			"Opened: %s",
 			request.Params.TextDocument.URI,
-			request.Params.TextDocument.Text,
 		)
+		state.OpenDocument(request.Params.TextDocument.URI, request.Params.TextDocument.Text)
+
+	case "textDocument/didChange":
+		var request lsp.DidChangeTextDocumentNotification
+		if err := json.Unmarshal(content, &request); err != nil {
+			logger.Printf("we couldnt parse this %s\n", err)
+			return
+		}
+
+		logger.Printf(
+			"Changed: %s",
+			request.Params.TextDocument.URI,
+		)
+
+		for _, change := range request.Params.ContentChanges {
+			state.UpdateDocument(request.Params.TextDocument.URI, change.Text)
+		}
 	}
 }
 

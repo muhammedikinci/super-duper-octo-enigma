@@ -1,9 +1,22 @@
-[my_lsp]2025/06/24 20:49:54 main.go:18: lsp server started
-[my_lsp]2025/06/24 20:49:54 main.go:34: received with initialize
-[my_lsp]2025/06/24 20:49:54 main.go:43: connected to Neovim 0.11.1
-[my_lsp]2025/06/24 20:49:54 main.go:54: Sent reply
-[my_lsp]2025/06/24 20:49:54 main.go:34: received with initialized
-[my_lsp]2025/06/24 20:49:54 main.go:34: received with textDocument/didOpen
-[my_lsp]2025/06/24 20:49:54 main.go:62: Opened: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md # lsp server
-[my_lsp]2025/06/24 20:50:02 main.go:34: received with textDocument/didSave
-[my_lsp]2025/06/24 20:50:10 main.go:34: received with shutdown
+[my_lsp]2025/06/24 21:11:32 main.go:19: lsp server started
+[my_lsp]2025/06/24 21:11:32 main.go:37: received with initialize
+[my_lsp]2025/06/24 21:11:32 main.go:47: connected to Neovim 0.11.1
+[my_lsp]2025/06/24 21:11:32 main.go:58: Sent reply
+[my_lsp]2025/06/24 21:11:33 main.go:37: received with initialized
+[my_lsp]2025/06/24 21:11:33 main.go:37: received with textDocument/didOpen
+[my_lsp]2025/06/24 21:11:33 main.go:67: Opened: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
+[my_lsp]2025/06/24 21:11:38 main.go:37: received with textDocument/didSave
+[my_lsp]2025/06/24 21:11:42 main.go:37: received with textDocument/didChange
+[my_lsp]2025/06/24 21:11:42 main.go:80: Changed: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
+[my_lsp]2025/06/24 21:11:51 main.go:37: received with textDocument/didChange
+[my_lsp]2025/06/24 21:11:51 main.go:80: Changed: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
+[my_lsp]2025/06/24 21:11:51 main.go:37: received with textDocument/didChange
+[my_lsp]2025/06/24 21:11:51 main.go:80: Changed: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
+[my_lsp]2025/06/24 21:11:52 main.go:37: received with textDocument/didChange
+[my_lsp]2025/06/24 21:11:52 main.go:80: Changed: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
+[my_lsp]2025/06/24 21:11:52 main.go:37: received with textDocument/didChange
+[my_lsp]2025/06/24 21:11:52 main.go:80: Changed: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
+[my_lsp]2025/06/24 21:11:52 main.go:37: received with textDocument/didChange
+[my_lsp]2025/06/24 21:11:52 main.go:80: Changed: file:///Users/muhammedikinci/Desktop/wrk/lsp_server/README.md
+[my_lsp]2025/06/24 21:11:52 main.go:37: received with textDocument/didSave
+[my_lsp]2025/06/24 21:12:00 main.go:37: received with shutdown
