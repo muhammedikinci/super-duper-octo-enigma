@@ -98,15 +98,11 @@ func handleMessage(
 			return
 		}
 
-		response := lsp.HoverResponse{
-			Response: lsp.Response{
-				RPC: "2.0",
-				ID:  &request.ID,
-			},
-			Result: lsp.HoverResult{
-				Contents: "hello, from my lsp",
-			},
-		}
+		response := state.Hover(
+			request.ID,
+			request.Params.TextDocument.URI,
+			request.Params.Position,
+		)
 
 		writeResponse(writer, response)
 	}
